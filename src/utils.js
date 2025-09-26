@@ -8,7 +8,9 @@ class HBCUtils {
         return string.replace(",", ".");
     }
 
-    // TODO: implement pattern checker
+    static patternCheck(pattern, string) {
+        return string === "" || pattern.test(string);
+    }
 }
 
 export default HBCUtils;

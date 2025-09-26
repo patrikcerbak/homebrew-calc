@@ -20,7 +20,16 @@ function abv(og, fg) {
     }
 }
 
-function Basics({og, fg, ogUpdate, fgUpdate}) {
+function calories(og, fg) {
+    if (og !== "" && fg !== "") {
+        return HBCUtils.roundToDecimals(4414 * og + 563.7 * fg - 4976, 0);
+        // Source: Ensminger (1999)
+    } else {
+        return "-";
+    }
+}
+
+function Basics({og, fg, volume, ogUpdate, fgUpdate, volumeUpdate}) {
     return (
         <div>
             <h2>Basic Information</h2>
@@ -31,9 +40,14 @@ function Basics({og, fg, ogUpdate, fgUpdate}) {
             <label htmlFor="fg">FG:</label>
             <input id="fg" type="text" value={fg} onChange={fgUpdate}></input>
 
+            <label htmlFor="volume">Volume (l):</label>
+            <input id="volume" type="text" value={volume} onChange={volumeUpdate}></input>
+
             <ul>
                 <li>Original extract: {sgToPlato(og)} °P</li>
                 <li>ABV: {abv(og, fg)} %</li>
+                <li>Calories in 500 ml: {calories(og, fg)} kcal</li>
+                <li>Volume: {volume} l</li>
             </ul>
         </div>
     );
